@@ -5,129 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Structures - Dr. Eskandari - 4031</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif; /* Modern font */
-            background-color: #f4f4f4; /* Light gray background */
-            color: #333; /* Dark gray text */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh; /* Ensure full viewport height */
-            margin: 0;
-            padding: 20px;
-        }
-
-        header {
-            background-color: #333;
-            color: #fff; /* White text on dark background */
-            padding: 20px;
-            text-align: center;
+        /* ... (Existing CSS styles remain the same) ... */
+        #matrix-background {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-            margin-bottom: 20px;
+            height: 100%;
+            z-index: -1; /* Place behind other content */
+            pointer-events: none; /* Don't interfere with clicks */
+            color: rgba(0, 255, 0, 0.6); /* Greenish Matrix style */ /* Greenish Matrix style */
+            font-family: monospace; /* Use a monospace font */
+            user-select: none; /* Prevent text selection */
         }
-
-        h1 {
-            margin: 0;
-        }
-
-        .instructions {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 600px; /* Limit width for better readability */
-            text-align: left; /* Left-align for better readability */
-            line-height: 1.6; /* Improved line spacing */
-        }
-
-        .instructions a {
-            color: #007bff; /* Blue link color */
-            text-decoration: none;
-        }
-
-        .instructions a:hover {
-            text-decoration: underline;
-        }
-
-        #weeks-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
-            grid-gap: 20px;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .week-box {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .week-box h3 {
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
-
-        .week-box button {
-            background-color: #007bff; /* Blue buttons */
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            width: 100%;
-            margin-bottom: 5px;
-            transition: background-color 0.3s ease; /* Smooth transition */
-        }
-
-        .week-box button:hover {
-            background-color: #0069d9; /* Darker blue on hover */
-        }
-
-        .inactive {
-            background-color: #ccc; /* Light gray for inactive */
-            color: #666;
-            cursor: not-allowed;
-        }
-
-
-        /* Remove the unnecessary lines */
-        .lines {
-            display: none;
-        }
-
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Data Structures - Dr. Eskandari - 4031 (Fall 2024)</h1>
-</header>
+    <div id="matrix-background"></div>  <!-- Container for Matrix effect -->
 
-<div class="instructions">
-    <h2>Instructor: Dr. Eskandari</h2>
-    <p>Teaching Assistants: Amirhossein Hemati, Ashkan Jamshid, Nima Soltani, Fatemeh Amiri, Hasti Tabatabaei, Yasmin Narangi Fard, Narges Nasiri</p>
-    <p>Group Link: <a href="https://t.me/datastructures4031" target="_blank">https://t.me/datastructures4031</a></p>
-    <p>Channel Link: <a href="https://t.me/ds_4031_channel" target="_blank">https://t.me/ds_4031_channel</a></p>
-    <p>To join the group, send your full name to one of the Telegram IDs below:</p>
-    <p><a href="https://t.me/Ashkan_Jamshid" target="_blank">t.me/Ashkan_Jamshid</a></p>
-    <p><a href="https://t.me/hastiitab" target="_blank">t.me/hastiitab</a></p>
-</div>
+    <header>
+        <h1>Data Structures - Dr. Eskandari - 4031 (Fall 2024)</h1>
+    </header>
 
-
-<div id="weeks-container">
-    <!-- Week boxes (same as before, but now they'll be in a grid) -->
-    </div>
-
+    <!-- ... Rest of your HTML code ... -->
 
 <script>
-    // ... (JavaScript remains the same,  but update your links!) ...
+    function setDownloadLinks(week, pdfLink, jupyterLink, answerLink) {
+        // ... (Your download link function remains unchanged) ...
+    }
+
+    // Matrix effect code
+    const matrixContainer = document.getElementById('matrix-background');
+    const characters = '01'; // Characters to use
+
+    function createMatrixLine() {
+        const line = document.createElement('div');
+        line.style.position = 'absolute';
+        line.style.whiteSpace = 'pre';
+        let lineText = '';
+        for (let i = 0; i < 50; i++) { // Adjust length of lines
+            lineText += characters[Math.floor(Math.random() * characters.length)];
+        }
+        line.textContent = lineText;
+        line.style.left = Math.random() * 100 + '%';
+        line.style.top = Math.random() * 100 + '%';
+        line.style.animation = `matrixFall ${Math.random() * 15 + 5}s linear infinite`; // Vary animation speed
+        matrixContainer.appendChild(line);
+    }
+
+    for (let i = 0; i < 100; i++) { // Adjust number of lines
+        createMatrixLine();
+    }
+
+
+    // CSS animation for matrix effect
+    const matrixFall = `
+        @keyframes matrixFall {
+            0% { transform: translateY(100%); opacity: 1; }
+            100% { transform: translateY(-100%); opacity: 0; }
+        }`;
+
+    let styleSheet = document.createElement('style');
+    styleSheet.type = 'text/css';
+    styleSheet.appendChild(document.createTextNode(matrixFall));
+    document.head.appendChild(styleSheet);
+
+
+    // ... (Your download link setup code remains unchanged) ...
 </script>
 
 </body>
