@@ -6,113 +6,128 @@
     <title>Data Structures - Dr. Eskandari - 4031</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
+            font-family: 'Arial', sans-serif; /* Modern font */
+            background-color: #f4f4f4; /* Light gray background */
+            color: #333; /* Dark gray text */
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
-            overflow: hidden; /* Hide vertical overflow of matrix */
-            background-color: #f4f4f4; /* Light gray */
-        }
-
-        #main-content {
-            width: 80%;
-            max-width: 1000px;
+            min-height: 100vh; /* Ensure full viewport height */
+            margin: 0;
             padding: 20px;
-            z-index: 1; /* Above the matrix */
         }
 
-        #matrix-background {
-            position: fixed;
-            top: 0;
-            left: 0;
+        header {
+            background-color: #333;
+            color: #fff; /* White text on dark background */
+            padding: 20px;
+            text-align: center;
             width: 100%;
-            height: 100%;
-            z-index: -1; /* Below main content */
-            pointer-events: none;
-            color: #0f0; /* Bright green */
-            font-family: 'Courier New', monospace;
-            user-select: none;
-            overflow: hidden;
-            background-color: black; /* Black background */
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            margin-bottom: 20px;
         }
 
-        #matrix-background > div {
-            position: absolute;
-            white-space: pre;
-            animation: matrixFall 10s linear infinite;
-            opacity: 0;
+        h1 {
+            margin: 0;
         }
 
-        @keyframes matrixFall {
-          0% { transform: translateY(100%); opacity: 1; }
-          100% { transform: translateY(-100%); opacity: 0; }
+        .instructions {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px; /* Limit width for better readability */
+            text-align: left; /* Left-align for better readability */
+            line-height: 1.6; /* Improved line spacing */
+        }
+
+        .instructions a {
+            color: #007bff; /* Blue link color */
+            text-decoration: none;
+        }
+
+        .instructions a:hover {
+            text-decoration: underline;
+        }
+
+        #weeks-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+            grid-gap: 20px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .week-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .week-box h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .week-box button {
+            background-color: #007bff; /* Blue buttons */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            margin-bottom: 5px;
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
+
+        .week-box button:hover {
+            background-color: #0069d9; /* Darker blue on hover */
+        }
+
+        .inactive {
+            background-color: #ccc; /* Light gray for inactive */
+            color: #666;
+            cursor: not-allowed;
         }
 
 
-        /* Style for vertical matrix fall */
-        @keyframes matrixFallVertical {
-            0% {
-                transform: translateX(100%); /* Start off-screen to the right */
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(-100%); /* Move off-screen to the left */
-                opacity: 0;
-            }
+        /* Remove the unnecessary lines */
+        .lines {
+            display: none;
         }
-
-        #matrix-background > div.vertical {
-            animation: matrixFallVertical 10s linear infinite; /* Use vertical animation */
-        }
-
-        /* ... (Rest of your existing styles) ... */
 
     </style>
 </head>
 <body>
 
-    <div id="matrix-background"></div>
+<header>
+    <h1>Data Structures - Dr. Eskandari - 4031 (Fall 2024)</h1>
+</header>
 
-    <div id="main-content">
-        <header>
-            <h1>Data Structures - Dr. Eskandari - 4031 (Fall 2024)</h1>
-        </header>
-        <!-- ... (Your instructions and week boxes) ... -->
+<div class="instructions">
+    <h2>Instructor: Dr. Eskandari</h2>
+    <p>Teaching Assistants: Amirhossein Hemati, Ashkan Jamshid, Nima Soltani, Fatemeh Amiri, Hasti Tabatabaei, Yasmin Narangi Fard, Narges Nasiri</p>
+    <p>Group Link: <a href="https://t.me/datastructures4031" target="_blank">https://t.me/datastructures4031</a></p>
+    <p>Channel Link: <a href="https://t.me/ds_4031_channel" target="_blank">https://t.me/ds_4031_channel</a></p>
+    <p>To join the group, send your full name to one of the Telegram IDs below:</p>
+    <p><a href="https://t.me/Ashkan_Jamshid" target="_blank">t.me/Ashkan_Jamshid</a></p>
+    <p><a href="https://t.me/hastiitab" target="_blank">t.me/hastiitab</a></p>
+</div>
+
+
+<div id="weeks-container">
+    <!-- Week boxes (same as before, but now they'll be in a grid) -->
     </div>
 
 
 <script>
-    // ... Your setDownloadLinks function ...
-
-    const matrixContainer = document.getElementById('matrix-background');
-    const characters = '01';
-
-    function createMatrixLine(isVertical) { //Added parameter
-        const line = document.createElement('div');
-        let lineText = '';
-        const numChars = isVertical ? 20 : 50;  // Shorter lines for vertical
-        for (let i = 0; i < numChars; i++) {
-            lineText += characters[Math.floor(Math.random() * characters.length)];
-        }
-        line.textContent = lineText;
-        line.style.left = Math.random() * 100 + '%';
-        line.style.top = Math.random() * 100 + '%';
-        line.style.animationDuration = (Math.random() * 15 + 5) + 's';
-        if (isVertical) {
-            line.classList.add('vertical');
-        }
-        matrixContainer.appendChild(line);
-    }
-
-
-    for (let i = 0; i < 50; i++) {  // Fewer lines for better performance
-        createMatrixLine(false); //Horizontal
-        createMatrixLine(true); //Vertical
-    }
-
-    // ... Your download link setup code ...
+    // ... (JavaScript remains the same,  but update your links!) ...
 </script>
 
 </body>
