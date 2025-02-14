@@ -7,33 +7,35 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            margin: 0; /* Remove default body margins */
+            margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            background-color: #f4f4f4; /* Light gray background color */
+            overflow: hidden; /* Hide vertical overflow of matrix */
+            background-color: #f4f4f4; /* Light gray */
         }
 
         #main-content {
             width: 80%;
-            max-width: 1000px; /* Set a maximum width for the main content */
+            max-width: 1000px;
             padding: 20px;
+            z-index: 1; /* Above the matrix */
         }
 
         #matrix-background {
-            position: absolute; /* Position absolutely within the body */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: -1; /* Below main content */
             pointer-events: none;
             color: #0f0; /* Bright green */
             font-family: 'Courier New', monospace;
             user-select: none;
             overflow: hidden;
-            background-color: black; /* Black background for better contrast */
+            background-color: black; /* Black background */
         }
 
         #matrix-background > div {
@@ -44,11 +46,28 @@
         }
 
         @keyframes matrixFall {
-            0% { transform: translateY(100%); opacity: 1; }
-            100% { transform: translateY(-100%); opacity: 0; }
+          0% { transform: translateY(100%); opacity: 1; }
+          100% { transform: translateY(-100%); opacity: 0; }
         }
 
-         /* ... (rest of your existing CSS styles) ... */
+
+        /* Style for vertical matrix fall */
+        @keyframes matrixFallVertical {
+            0% {
+                transform: translateX(100%); /* Start off-screen to the right */
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-100%); /* Move off-screen to the left */
+                opacity: 0;
+            }
+        }
+
+        #matrix-background > div.vertical {
+            animation: matrixFallVertical 10s linear infinite; /* Use vertical animation */
+        }
+
+        /* ... (Rest of your existing styles) ... */
 
     </style>
 </head>
@@ -56,15 +75,44 @@
 
     <div id="matrix-background"></div>
 
-    <div id="main-content">  <!-- Wrap your main content in this div -->
+    <div id="main-content">
         <header>
             <h1>Data Structures - Dr. Eskandari - 4031 (Fall 2024)</h1>
         </header>
         <!-- ... (Your instructions and week boxes) ... -->
     </div>
 
+
 <script>
-    // ... (Your JavaScript functions remain the same) ...
+    // ... Your setDownloadLinks function ...
+
+    const matrixContainer = document.getElementById('matrix-background');
+    const characters = '01';
+
+    function createMatrixLine(isVertical) { //Added parameter
+        const line = document.createElement('div');
+        let lineText = '';
+        const numChars = isVertical ? 20 : 50;  // Shorter lines for vertical
+        for (let i = 0; i < numChars; i++) {
+            lineText += characters[Math.floor(Math.random() * characters.length)];
+        }
+        line.textContent = lineText;
+        line.style.left = Math.random() * 100 + '%';
+        line.style.top = Math.random() * 100 + '%';
+        line.style.animationDuration = (Math.random() * 15 + 5) + 's';
+        if (isVertical) {
+            line.classList.add('vertical');
+        }
+        matrixContainer.appendChild(line);
+    }
+
+
+    for (let i = 0; i < 50; i++) {  // Fewer lines for better performance
+        createMatrixLine(false); //Horizontal
+        createMatrixLine(true); //Vertical
+    }
+
+    // ... Your download link setup code ...
 </script>
 
 </body>
