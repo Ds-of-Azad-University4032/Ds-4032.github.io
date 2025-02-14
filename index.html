@@ -14,10 +14,11 @@
             height: 100%;
             z-index: -1; /* Behind other content */
             pointer-events: none; /* Don't block clicks */
-            color: rgba(0, 255, 0, 0.6); /* Greenish Matrix style */
-            font-family: monospace; /* Monospace font */
+            color: #0f0; /* Bright green */ /* Greenish Matrix style */
+            font-family: 'Courier New', monospace; /* Monospace font */
             user-select: none; /* Prevent text selection */
             overflow: hidden; /* Hide overflowing characters */
+            background-color: black; /*Black background*/
         }
         #matrix-background > div {
             position: absolute;
@@ -33,7 +34,7 @@
 </head>
 <body>
 
-    <div id="matrix-background"></div>  <!-- Container for Matrix effect -->
+    <div id="matrix-background"></div>  <!-- Matrix background container -->
 
     <!-- ... (Your header and other HTML content) ... -->
 
@@ -54,7 +55,7 @@
         line.textContent = lineText;
         line.style.left = Math.random() * 100 + '%';
         line.style.top = Math.random() * 100 + '%';
-        line.style.animationDuration = Math.random() * 15 + 5 + 's'; // Vary animation speed
+        line.style.animationDuration = (Math.random() * 15 + 5) + 's'; // Vary animation speed
         matrixContainer.appendChild(line);
     }
 
