@@ -5,65 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Structures - Dr. Eskandari - 4031</title>
     <style>
-        /* ... (Your existing CSS styles) ... */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0; /* Remove default body margins */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f4; /* Light gray background color */
+        }
+
+        #main-content {
+            width: 80%;
+            max-width: 1000px; /* Set a maximum width for the main content */
+            padding: 20px;
+        }
+
         #matrix-background {
-            position: fixed;
+            position: absolute; /* Position absolutely within the body */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Behind other content */
-            pointer-events: none; /* Don't block clicks */
-            color: #0f0; /* Bright green */ /* Greenish Matrix style */
-            font-family: 'Courier New', monospace; /* Monospace font */
-            user-select: none; /* Prevent text selection */
-            overflow: hidden; /* Hide overflowing characters */
-            background-color: black; /*Black background*/
+            z-index: -1;
+            pointer-events: none;
+            color: #0f0; /* Bright green */
+            font-family: 'Courier New', monospace;
+            user-select: none;
+            overflow: hidden;
+            background-color: black; /* Black background for better contrast */
         }
+
         #matrix-background > div {
             position: absolute;
-            white-space: pre; /* Preserve spaces */
-            animation: matrixFall 10s linear infinite; /* Default animation */
-            opacity: 0; /* Initially transparent */
+            white-space: pre;
+            animation: matrixFall 10s linear infinite;
+            opacity: 0;
         }
+
         @keyframes matrixFall {
             0% { transform: translateY(100%); opacity: 1; }
             100% { transform: translateY(-100%); opacity: 0; }
         }
+
+         /* ... (rest of your existing CSS styles) ... */
+
     </style>
 </head>
 <body>
 
-    <div id="matrix-background"></div>  <!-- Matrix background container -->
+    <div id="matrix-background"></div>
 
-    <!-- ... (Your header and other HTML content) ... -->
+    <div id="main-content">  <!-- Wrap your main content in this div -->
+        <header>
+            <h1>Data Structures - Dr. Eskandari - 4031 (Fall 2024)</h1>
+        </header>
+        <!-- ... (Your instructions and week boxes) ... -->
+    </div>
 
 <script>
-    function setDownloadLinks(week, pdfLink, jupyterLink, answerLink) {
-        // ... (Your download link function remains the same) ...
-    }
-
-    const matrixContainer = document.getElementById('matrix-background');
-    const characters = '01';
-
-    function createMatrixLine() {
-        const line = document.createElement('div');
-        let lineText = '';
-        for (let i = 0; i < 50; i++) {
-            lineText += characters[Math.floor(Math.random() * characters.length)];
-        }
-        line.textContent = lineText;
-        line.style.left = Math.random() * 100 + '%';
-        line.style.top = Math.random() * 100 + '%';
-        line.style.animationDuration = (Math.random() * 15 + 5) + 's'; // Vary animation speed
-        matrixContainer.appendChild(line);
-    }
-
-    for (let i = 0; i < 100; i++) {
-        createMatrixLine();
-    }
-
-    // ... (Your download link setup code) ...
+    // ... (Your JavaScript functions remain the same) ...
 </script>
 
 </body>
